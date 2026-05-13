@@ -9,10 +9,10 @@ Caps + N (klawiatura fizyczna)
   │
   ▼  Karabiner Elements (na laptopie)
      · Caps trzymane → modyfikator Hyper (⌘⌃⌥⇧)
-     · Hyper+N → wirtualny klawisz F13
+     · Hyper+N → Shift+F1 (emitowane bezpośrednio)
   │
   ▼  Terminal (iTerm2 / Terminal.app)
-     · F13 → escape sequence `\e[1;2P` (=Shift+F1, bo macOS nie ma fizycznego F13)
+     · Shift+F1 → escape sequence `\e[1;2P`
   │
   ▼  SSH (jeśli pracujesz zdalnie) → tmux na docelowej maszynie
   │
@@ -21,6 +21,8 @@ Caps + N (klawiatura fizyczna)
 ```
 
 Karabiner musi być **lokalnie** (tam gdzie fizyczna klawiatura). tmux może być lokalnie albo na zdalnym serwerze przez SSH — klawisze przechodzą bez problemu.
+
+> Dlaczego Shift+Fx a nie F13–F24: macOS koduje F13–F19 jako Shift+F1..Shift+F7, ale **F20–F24 nie mają wbudowanego mapowania** — terminale ich nie wysyłają. Emitując Shift+Fx bezpośrednio omijamy ten problem dla wszystkich 12 slotów.
 
 ## Wymagania
 
@@ -98,36 +100,23 @@ Dla rzadszych akcji `tmux.conf` zostawia klasyczny prefix backtick. `` ` ? `` w 
 
 ## Dodawanie własnych bindów
 
-12 slotów F13–F24 jest zajętych. Aby dodać nową akcję bez prefixa:
+12 slotów `Shift+F1..Shift+F12` jest zajętych. Aby dodać nową akcję bez prefixa:
 
-1. W `~/.config/karabiner/assets/complex_modifications/karabiner-hyper-tmux.json` zamień jedną z reguł na nową kombinację `Hyper+klawisz → Fxx`
-2. W `~/.tmux.conf` zamień odpowiadający `bind -n S-Fy <stara akcja>` na `bind -n S-Fy <nowa>`
+1. W `~/.config/karabiner/assets/complex_modifications/karabiner-hyper-tmux.json` zamień jedną z reguł na nową kombinację `Hyper+klawisz → Shift+Fx`
+2. W `~/.tmux.conf` zamień odpowiadający `bind -n S-Fx <stara akcja>` na `bind -n S-Fx <nowa>`
 3. Reload: w Karabinerze re-enable rule, w tmuxie `` ` r ``
 
-Mapowanie F-keys → tmux key names:
-
-| Karabiner emit | tmux widzi |
-|---|---|
-| F13 | S-F1 |
-| F14 | S-F2 |
-| F15 | S-F3 |
-| F16 | S-F4 |
-| F17 | S-F5 |
-| F18 | S-F6 |
-| F19 | S-F7 |
-| F20 | S-F8 |
-| F21 | S-F9 |
-| F22 | S-F10 |
-| F23 | S-F11 |
-| F24 | S-F12 |
-
-(macOS koduje wirtualne F13+ jako Shift+F1+, bo fizyczne klawisze F13+ nie istnieją na klawiaturach macOS.)
+Karabiner emituje `Shift+F1..Shift+F12`, tmux łapie je jako `S-F1..S-F12` — bezpośrednie mapowanie 1:1.
 
 ## Troubleshooting
 
 ### `unknown key: F13` przy `tmux source-file`
 
-Twój config ma `bind -n F13 ...` zamiast `bind -n S-F1 ...`. Patrz tabela mapowania wyżej.
+Twój config ma `bind -n F13 ...` zamiast `bind -n S-F1 ...`. Karabiner emituje `Shift+F1..Shift+F12`, tmux łapie je jako `S-F1..S-F12`.
+
+### `Caps+D`, `Caps+X` (i inne) nic nie robią mimo że `Caps+N` działa
+
+Karabiner emituje `F20..F24` zamiast `Shift+F8..Shift+F12` — macOS nie ma mapowania dla F20+ → terminal wysyła nic. Sprawdź czy `karabiner-hyper-tmux.json` ma w polach `to` zapisy typu `{"key_code": "f8", "modifiers": ["left_shift"]}`, **NIE** `{"key_code": "f20"}`. Jeśli masz stary plik z F13-F24, podmień na nowy z tego repo.
 
 ### `Caps+N` nic nie robi
 
