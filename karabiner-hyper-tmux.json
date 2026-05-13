@@ -1,0 +1,185 @@
+{
+    "title": "Hyper → tmux direct bindings (F13-F24)",
+    "rules": [
+        {
+            "description": "Hyper+N → F13  (tmux: new-window)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "n",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f13" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+→ → F14  (tmux: next-window)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_arrow",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f14" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+← → F15  (tmux: previous-window)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_arrow",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f15" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+H → F16  (tmux: select-pane -L)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "h",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f16" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+J → F17  (tmux: select-pane -D)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "j",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f17" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+K → F18  (tmux: select-pane -U)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "k",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f18" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+L → F19  (tmux: select-pane -R)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "l",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f19" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+\\ → F20  (tmux: split-window -h, panel po prawej)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "backslash",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f20" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+- → F21  (tmux: split-window -v, panel pod)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "hyphen",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f21" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+D → F22  (tmux: detach-client)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "d",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f22" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+Z → F23  (tmux: zoom panel toggle)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "z",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f23" }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+X → F24  (tmux: kill-pane z potwierdzeniem)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "x",
+                        "modifiers": {
+                            "mandatory": ["left_command", "left_control", "left_option", "left_shift"]
+                        }
+                    },
+                    "to": [{ "key_code": "f24" }]
+                }
+            ]
+        }
+    ]
+}
