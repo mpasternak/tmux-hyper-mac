@@ -226,7 +226,7 @@
             ]
         },
         {
-            "description": "Hyper+R → Ctrl+Shift+F5  (tmux: rename current window)",
+            "description": "Hyper+R → Alt+Shift+F1  (tmux: rename current window) — kanał 3, bo na kanale 2 (Ctrl+Shift+Fn) Hyper+R był zjadany przez macOS/jakąś apkę",
             "manipulators": [
                 {
                     "type": "basic",
@@ -234,7 +234,7 @@
                         "key_code": "r",
                         "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
                     },
-                    "to": [{ "key_code": "f5", "modifiers": ["left_control", "left_shift"] }]
+                    "to": [{ "key_code": "f1", "modifiers": ["left_alt", "left_shift"] }]
                 }
             ]
         },

@@ -127,8 +127,8 @@ Dostępne "kanały emisji" (Karabiner → tmux):
 | Kanał | Karabiner emit | tmux key | Zajęte sloty |
 |---|---|---|---|
 | podstawowy | `Shift+F1..Shift+F12` | `S-F1..S-F12` | 12/12 |
-| rozszerzenie 1 | `Ctrl+Shift+F1..Ctrl+Shift+F12` | `C-S-F1..C-S-F12` | 6/12 |
-| rozszerzenie 2 (na zapas) | `Alt+Shift+F1..F12` | `M-S-F1..M-S-F12` | 0/12 |
+| rozszerzenie 1 | `Ctrl+Shift+F1..Ctrl+Shift+F12` | `C-S-F1..C-S-F12` | 5/12 (F1-F4, F6) |
+| rozszerzenie 2 | `Alt+Shift+F1..F12` | `M-S-F1..M-S-F12` | 1/12 (F1 = Hyper+R) |
 
 Aby dodać nową akcję bez prefixa:
 
@@ -172,6 +172,21 @@ tmux new -s test
 ### Caps Lock LED nie świeci
 
 To celowe — wariant "Escape if alone" zamienia toggle Caps Lock na Esc. Aby pisać DUŻYMI LITERAMI używaj Shift jak w normalnym tekście.
+
+### `Caps+R` (lub inny pojedynczy binding) nic nie robi, ale reszta działa
+
+Konkretnie `Hyper+R` z kanału 2 (`Ctrl+Shift+F5/F7/...`) okazał się padać u nas — coś (macOS keyboard navigation, albo apka typu Raycast/BTT/Hammerspoon słuchająca globalnie `Cmd+Ctrl+Opt+Shift+R`) zjadało zdarzenie zanim docierało do iTerm2. Diagnostyka:
+
+```sh
+# w iTerm2, BEZ tmuxa:
+cat
+# wciśnij Caps+R — jeśli nic się nie pokazuje, coś zjada event
+# wciśnij Caps+T dla porównania — powinno pokazać sekwencję escape
+```
+
+Karabiner-EventViewer.app rozstrzyga jednoznacznie: jeśli EventViewer pokazuje wyemitowany F-key z modyfikatorami, Karabiner robi swoje — winowajca siedzi między macOS a iTerm2. Jeśli EventViewer nie pokazuje wyjścia — reguła Karabinera nie aplikuje się (najczęstsza przyczyna: nie przeładowana w GUI po edycji JSON).
+
+W tym repo `Hyper+R` siedzi już na kanale 3 (`M-S-F1`) właśnie z tego powodu — kanały macOS-owe (Ctrl+F1..F8 dla nawigacji klawiaturą) ani potencjalne globalne shortcut-listenery nie kolidują z `Alt+Shift+F1`.
 
 ### Karabiner-EventViewer.app
 
