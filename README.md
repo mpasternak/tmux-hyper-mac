@@ -31,30 +31,22 @@ Karabiner musi być **lokalnie** (tam gdzie fizyczna klawiatura). tmux może by�
 
 ## Instalacja
 
-### 1. Reguła Karabinera: Caps Lock → Hyper (Escape if alone)
+### 1. Reguły Karabinera (jeden plik, 13 reguł)
 
 ```bash
 mkdir -p ~/.config/karabiner/assets/complex_modifications
-cp karabiner-caps-to-hyper.json ~/.config/karabiner/assets/complex_modifications/
-```
-
-W aplikacji: **Karabiner-Elements → Settings → Complex Modifications → Add predefined rule** → znajdź `Caps Lock → Hyper Key (⌃⌥⇧⌘) (Escape if alone)` → **Enable**.
-
-Daje to:
-- **Caps trzymane** + cokolwiek = Hyper modifier (⌘⌃⌥⇧)
-- **Caps pyknięte solo** = Escape (przydatne dla vim/emacs)
-
-> macOS 26+ (Tahoe): wariant "Caps Lock if alone" (toggle Caps Lock) jest zepsuty przez regresję `hidutil`. Używamy wariantu "Escape if alone".
-
-### 2. Reguła Karabinera: Hyper+klawisz → F-key
-
-```bash
 cp karabiner-hyper-tmux.json ~/.config/karabiner/assets/complex_modifications/
 ```
 
-W aplikacji: **Add predefined rule** → `Hyper → tmux direct bindings (F13-F24)` → **Enable All** (12 reguł).
+W aplikacji: **Karabiner-Elements → Settings → Complex Modifications → Add predefined rule** → znajdź `Caps Lock → Hyper → tmux direct bindings` → **Enable All**.
 
-### 3. Config tmuxa
+Plik zawiera:
+- **1 regułę** Caps Lock → Hyper (Escape if alone): Caps trzymane = Hyper (⌘⌃⌥⇧), Caps pyknięte solo = Escape
+- **12 reguł** Hyper+klawisz → Shift+F1..Shift+F12 (kolejne bindy tmuxa)
+
+> macOS 26+ (Tahoe): wariant "Caps Lock if alone" (toggle Caps Lock) jest zepsuty przez regresję `hidutil`. Stąd "Escape if alone" — przydatne i tak dla vim/emacs.
+
+### 2. Config tmuxa
 
 Na maszynie gdzie chodzi tmux (lokalnej lub zdalnej):
 
@@ -64,6 +56,13 @@ tmux source-file ~/.tmux.conf    # jeśli tmux już działa
 ```
 
 Jeśli masz własny `.tmux.conf` — przekopiuj z naszego pliku tylko sekcje "Hyper-direct bindy" oraz odpowiadające im ustawienia ogólne.
+
+### 3. (jeśli zdalna maszyna) — config tmuxa na serwerze przez SSH
+
+```bash
+scp tmux.conf user@server:~/.tmux.conf
+ssh user@server 'tmux source-file ~/.tmux.conf'
+```
 
 ## Bindy bez prefixa
 
@@ -152,8 +151,7 @@ Najlepszy debug tool: pokazuje co dokładnie Karabiner emituje. Tap `Caps+N` z o
 ## Pliki w repo
 
 - `tmux.conf` — gotowy `.tmux.conf` (prefix backtick + bindy bez prefixa dla Hyper)
-- `karabiner-caps-to-hyper.json` — Karabiner: Caps→Hyper (wariant Escape if alone)
-- `karabiner-hyper-tmux.json` — Karabiner: Hyper+klawisz → F13..F24
+- `karabiner-hyper-tmux.json` — wszystkie reguły Karabinera: Caps→Hyper (Escape if alone) + 12 Hyper+klawisz → Shift+F1..Shift+F12
 - `LICENSE` — MIT
 
 ## License
