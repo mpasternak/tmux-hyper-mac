@@ -172,6 +172,84 @@
                     "to": [{ "key_code": "f12", "modifiers": ["left_shift"] }]
                 }
             ]
+        },
+        {
+            "description": "Hyper+↑ → Ctrl+Shift+F1  (tmux: split panel above)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "up_arrow",
+                        "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                    },
+                    "to": [{ "key_code": "f1", "modifiers": ["left_control", "left_shift"] }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+/ → Ctrl+Shift+F2  (tmux: split panel left)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "slash",
+                        "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                    },
+                    "to": [{ "key_code": "f2", "modifiers": ["left_control", "left_shift"] }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+T → Ctrl+Shift+F3  (tmux: choose-tree window picker)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "t",
+                        "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                    },
+                    "to": [{ "key_code": "f3", "modifiers": ["left_control", "left_shift"] }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+S → Ctrl+Shift+F4  (tmux: choose-tree session picker)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "s",
+                        "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                    },
+                    "to": [{ "key_code": "f4", "modifiers": ["left_control", "left_shift"] }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+R → Ctrl+Shift+F5  (tmux: rename current window)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "r",
+                        "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                    },
+                    "to": [{ "key_code": "f5", "modifiers": ["left_control", "left_shift"] }]
+                }
+            ]
+        },
+        {
+            "description": "Hyper+Space → Ctrl+Shift+F6  (tmux: last-window toggle)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "spacebar",
+                        "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
+                    },
+                    "to": [{ "key_code": "f6", "modifiers": ["left_control", "left_shift"] }]
+                }
+            ]
         }
     ]
 }

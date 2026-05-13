@@ -66,18 +66,41 @@ ssh user@server 'tmux source-file ~/.tmux.conf'
 
 ## Bindy bez prefixa
 
+**Okna i sesje**
+
 | Skrót | Akcja |
 |---|---|
 | `Caps+N` | nowe okno (dziedziczy bieżący katalog) |
 | `Caps+→` | następne okno |
 | `Caps+←` | poprzednie okno |
+| `Caps+Space` | last-window (toggle do poprzedniego okna) |
+| `Caps+T` | wybierz okno z listy (interaktywny picker) |
+| `Caps+S` | wybierz sesję z listy |
+| `Caps+R` | rename bieżącego okna |
+| `Caps+D` | detach (sesja żyje dalej w tle) |
+
+**Panele — nawigacja**
+
+| Skrót | Akcja |
+|---|---|
 | `Caps+H` | panel w lewo |
 | `Caps+J` | panel w dół |
 | `Caps+K` | panel w górę |
 | `Caps+L` | panel w prawo |
-| `Caps+\` | split poziomy (nowy panel po prawej) |
-| `Caps+-` | split pionowy (nowy panel pod) |
-| `Caps+D` | detach (sesja żyje dalej w tle) |
+
+**Panele — splity (4 kierunki)**
+
+| Skrót | Akcja |
+|---|---|
+| `Caps+↑` | nowy panel **above** |
+| `Caps+-` | nowy panel **below** |
+| `Caps+/` | nowy panel **left** |
+| `Caps+\` | nowy panel **right** |
+
+**Panele — pozostałe**
+
+| Skrót | Akcja |
+|---|---|
 | `Caps+Z` | zoom panela (toggle) |
 | `Caps+X` | kill panel (pyta y/n) |
 
@@ -99,13 +122,19 @@ Dla rzadszych akcji `tmux.conf` zostawia klasyczny prefix backtick. `` ` ? `` w 
 
 ## Dodawanie własnych bindów
 
-12 slotów `Shift+F1..Shift+F12` jest zajętych. Aby dodać nową akcję bez prefixa:
+Dostępne "kanały emisji" (Karabiner → tmux):
 
-1. W `~/.config/karabiner/assets/complex_modifications/karabiner-hyper-tmux.json` zamień jedną z reguł na nową kombinację `Hyper+klawisz → Shift+Fx`
-2. W `~/.tmux.conf` zamień odpowiadający `bind -n S-Fx <stara akcja>` na `bind -n S-Fx <nowa>`
+| Kanał | Karabiner emit | tmux key | Zajęte sloty |
+|---|---|---|---|
+| podstawowy | `Shift+F1..Shift+F12` | `S-F1..S-F12` | 12/12 |
+| rozszerzenie 1 | `Ctrl+Shift+F1..Ctrl+Shift+F12` | `C-S-F1..C-S-F12` | 6/12 |
+| rozszerzenie 2 (na zapas) | `Alt+Shift+F1..F12` | `M-S-F1..M-S-F12` | 0/12 |
+
+Aby dodać nową akcję bez prefixa:
+
+1. W `~/.config/karabiner/assets/complex_modifications/karabiner-hyper-tmux.json` dopisz regułę `Hyper+klawisz → <wolny F-key combo>`
+2. W `~/.tmux.conf` dopisz odpowiadający `bind -n <ten F-key combo> <akcja>`
 3. Reload: w Karabinerze re-enable rule, w tmuxie `` ` r ``
-
-Karabiner emituje `Shift+F1..Shift+F12`, tmux łapie je jako `S-F1..S-F12` — bezpośrednie mapowanie 1:1.
 
 ## Troubleshooting
 
