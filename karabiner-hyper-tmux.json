@@ -96,7 +96,7 @@
             ]
         },
         {
-            "description": "Hyper+L → Shift+F7  (tmux: select-pane -R)",
+            "description": "Hyper+L → Alt+Shift+F2  (tmux: select-pane -R) — przeniesione z S-F7, kanał 1 padał (prawdopodobnie globalny shortcut listener na Hyper+L)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -104,12 +104,12 @@
                         "key_code": "l",
                         "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
                     },
-                    "to": [{ "key_code": "f7", "modifiers": ["left_shift"] }]
+                    "to": [{ "key_code": "f2", "modifiers": ["left_alt", "left_shift"] }]
                 }
             ]
         },
         {
-            "description": "Hyper+\\ → Shift+F8  (tmux: split-window -h)",
+            "description": "Hyper+| (czyli Hyper+\\) → Alt+Shift+F3  (tmux: split-window -h) — | wizualnie pasuje do pionowego splitu",
             "manipulators": [
                 {
                     "type": "basic",
@@ -117,7 +117,7 @@
                         "key_code": "backslash",
                         "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
                     },
-                    "to": [{ "key_code": "f8", "modifiers": ["left_shift"] }]
+                    "to": [{ "key_code": "f3", "modifiers": ["left_alt", "left_shift"] }]
                 }
             ]
         },
@@ -187,7 +187,7 @@
             ]
         },
         {
-            "description": "Hyper+/ → Ctrl+Shift+F2  (tmux: split panel left)",
+            "description": "Hyper+/ → Alt+Shift+F4  (tmux: split panel left) — przeniesione z C-S-F2, macOS przechwytuje Ctrl+F2 (menu bar)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -195,7 +195,7 @@
                         "key_code": "slash",
                         "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
                     },
-                    "to": [{ "key_code": "f2", "modifiers": ["left_control", "left_shift"] }]
+                    "to": [{ "key_code": "f4", "modifiers": ["left_alt", "left_shift"] }]
                 }
             ]
         },
@@ -213,7 +213,7 @@
             ]
         },
         {
-            "description": "Hyper+S → Ctrl+Shift+F4  (tmux: choose-tree session picker)",
+            "description": "Hyper+S → Alt+Shift+F5  (tmux: choose-tree session picker) — przeniesione z C-S-F4, macOS przechwytuje Ctrl+F4 (window switch)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -221,7 +221,7 @@
                         "key_code": "s",
                         "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
                     },
-                    "to": [{ "key_code": "f4", "modifiers": ["left_control", "left_shift"] }]
+                    "to": [{ "key_code": "f5", "modifiers": ["left_alt", "left_shift"] }]
                 }
             ]
         },
@@ -239,7 +239,7 @@
             ]
         },
         {
-            "description": "Hyper+Space → Ctrl+Shift+F6  (tmux: last-window toggle)",
+            "description": "Hyper+Space → Alt+Shift+F6  (tmux: last-window toggle) — przeniesione z C-S-F6, macOS przechwytuje Ctrl+F6 (floating window)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -247,7 +247,7 @@
                         "key_code": "spacebar",
                         "modifiers": { "mandatory": ["left_command", "left_control", "left_option", "left_shift"] }
                     },
-                    "to": [{ "key_code": "f6", "modifiers": ["left_control", "left_shift"] }]
+                    "to": [{ "key_code": "f6", "modifiers": ["left_alt", "left_shift"] }]
                 }
             ]
         }

@@ -95,7 +95,7 @@ ssh user@server 'tmux source-file ~/.tmux.conf'
 | `Caps+↑` | nowy panel **above** |
 | `Caps+-` | nowy panel **below** |
 | `Caps+/` | nowy panel **left** |
-| `Caps+\` | nowy panel **right** |
+| `Caps+\|` | nowy panel **right** (fizycznie klawisz `\`, `\|` wizualnie pasuje do pionowego splitu) |
 
 **Panele — pozostałe**
 
@@ -126,9 +126,15 @@ Dostępne "kanały emisji" (Karabiner → tmux):
 
 | Kanał | Karabiner emit | tmux key | Zajęte sloty |
 |---|---|---|---|
-| podstawowy | `Shift+F1..Shift+F12` | `S-F1..S-F12` | 12/12 |
-| rozszerzenie 1 | `Ctrl+Shift+F1..Ctrl+Shift+F12` | `C-S-F1..C-S-F12` | 5/12 (F1-F4, F6) |
-| rozszerzenie 2 | `Alt+Shift+F1..F12` | `M-S-F1..M-S-F12` | 1/12 (F1 = Hyper+R) |
+| podstawowy | `Shift+F1..Shift+F12` | `S-F1..S-F12` | 10/12 (F1-F6, F9-F12) |
+| rozszerzenie 1 | `Ctrl+Shift+F1..Ctrl+Shift+F12` | `C-S-F1..C-S-F12` | 2/12 (F1, F3) |
+| rozszerzenie 2 | `Alt+Shift+F1..F12` | `M-S-F1..M-S-F12` | 6/12 (F1-F6) |
+
+> **Dlaczego kanał 1 ma tylko 10/12 a nie 12/12?** Kanał 1 też ma kolizje, ale rzadziej. U mnie `S-F7` (Hyper+L) i `S-F8` (Hyper+\\) padały — prawdopodobnie globalne shortcut-listenery (Hammerspoon/Raycast/BTT) łapią `Cmd+Ctrl+Opt+Shift+L` jeszcze zanim Karabiner zdąży podmienić. Przerzucone na kanał 3.
+>
+> **Dlaczego kanał 2 ma tylko 2/12?** macOS rezerwuje `Ctrl+F1..F8` dla Full Keyboard Access (focus menu bar / dock / toolbar / okna). Z modyfikatorem Shift te skróty wciąż się aktywują dla F2, F4, F5, F6. F1 i F3 zwykle przechodzą (toggle access + dock nie mają reverse-direction wariantów). Stąd tylko F1 i F3 są bezpieczne na kanale 2.
+>
+> **Kanał 3 (Alt+Shift+Fn) to obecnie najpewniejszy slot** — macOS nie rezerwuje Option/Alt z F-keyami. Dla nowych bindów idź od razu w kanał 3.
 
 Aby dodać nową akcję bez prefixa:
 
@@ -187,6 +193,16 @@ cat
 Karabiner-EventViewer.app rozstrzyga jednoznacznie: jeśli EventViewer pokazuje wyemitowany F-key z modyfikatorami, Karabiner robi swoje — winowajca siedzi między macOS a iTerm2. Jeśli EventViewer nie pokazuje wyjścia — reguła Karabinera nie aplikuje się (najczęstsza przyczyna: nie przeładowana w GUI po edycji JSON).
 
 W tym repo `Hyper+R` siedzi już na kanale 3 (`M-S-F1`) właśnie z tego powodu — kanały macOS-owe (Ctrl+F1..F8 dla nawigacji klawiaturą) ani potencjalne globalne shortcut-listenery nie kolidują z `Alt+Shift+F1`.
+
+### Pojedynczy `Shift+Fn` binding wysyła dziwną sekwencję (np. `^[[25~` zamiast `^[[15;2~`) albo plain arrow
+
+iTerm2 ma własną warstwę **Profile Key Mappings** która siedzi **ponad** xterm-em, terminfo i wszystkim innym. Jeśli kiedykolwiek zaimportowałeś profil z internetu, miałeś config z gotowymi keymapami albo zdarzyło ci się accidentally dodać binding — iTerm2 będzie mapował `Shift+F3 → goły left arrow`, `Shift+F5 → F13` (`^[[25~`), itp. Karabiner i tmux nie mają z tym nic wspólnego — iTerm2 jako pierwszy łapie i podmienia.
+
+Diagnoza: w `cat` (BEZ tmuxa) wciśnij `Caps+J`. Powinieneś zobaczyć `^[[15;2~` (Shift+F5 w xterm modifier encoding). Jeśli widzisz `^[[25~`, `^[[D` albo cokolwiek innego — iTerm2 podmienia.
+
+Fix: **Settings → Profiles → [twój profil] → Keys → Key Mappings**. Przewiń liście, usuń wszystkie wpisy na `Shift+F1..F12`. Drugie miejsce: **Settings → Keys → Key Bindings** (globalne keymapy, ponad profilami). Po wyczyszczeniu iTerm2 zacznie wysyłać standardowe xterm sequence, tmux od razu rozpozna `S-Fn` bez żadnej dodatkowej konfiguracji.
+
+> Hierarchia diagnostyki dla problemów z F-keys: (1) iTerm2 Profile Keys → (2) iTerm2 Global Keys → (3) Karabiner-EventViewer → (4) `cat` w iTerm2 bez tmuxa → (5) `cat` w tmuxie + `tmux list-keys`. Sprawdzaj w tej kolejności, bo każda warstwa może blokować następną.
 
 ### Karabiner-EventViewer.app
 
