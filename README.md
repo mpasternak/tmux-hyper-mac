@@ -2,6 +2,8 @@
 
 Konfiguracja klawiatury pod macOS która sprawia że tmuxem da się sterować **bezpośrednio** klawiszem Hyper (mapowanym na Caps Lock) — bez prefixa. `Caps+N` otwiera nowe okno, `Caps+←/→` przełącza okna, `Caps+H/J/K/L` chodzi po panelach.
 
+> Linux? Zobacz [tmux-hyper-linux](https://github.com/mpasternak/tmux-hyper-linux) — to samo przez keyd, z identycznymi kodami, więc `tmux.conf` jest wspólny.
+
 ## Architektura
 
 ```
